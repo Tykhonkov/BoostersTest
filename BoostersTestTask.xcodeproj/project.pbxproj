@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F566E2433E49F00BA5180 /* AppDelegate.swift */; };
 		C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56702433E49F00BA5180 /* SceneDelegate.swift */; };
-		C23F56732433E49F00BA5180 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56722433E49F00BA5180 /* ContentView.swift */; };
+		C23F56732433E49F00BA5180 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56722433E49F00BA5180 /* MainView.swift */; };
 		C23F56752433E4A000BA5180 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C23F56742433E4A000BA5180 /* Assets.xcassets */; };
 		C23F56782433E4A000BA5180 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C23F56772433E4A000BA5180 /* Preview Assets.xcassets */; };
 		C23F567B2433E4A000BA5180 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C23F56792433E4A000BA5180 /* LaunchScreen.storyboard */; };
 		C23F56862433E4A000BA5180 /* BoostersTestTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56852433E4A000BA5180 /* BoostersTestTaskTests.swift */; };
+		C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56922433E9A600BA5180 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +31,7 @@
 		C23F566B2433E49F00BA5180 /* BoostersTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostersTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23F566E2433E49F00BA5180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C23F56702433E49F00BA5180 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C23F56722433E49F00BA5180 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C23F56722433E49F00BA5180 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C23F56742433E4A000BA5180 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C23F56772433E4A000BA5180 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C23F567A2433E4A000BA5180 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +39,7 @@
 		C23F56812433E4A000BA5180 /* BoostersTestTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoostersTestTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23F56852433E4A000BA5180 /* BoostersTestTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersTestTaskTests.swift; sourceTree = "<group>"; };
 		C23F56872433E4A000BA5180 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C23F56922433E9A600BA5180 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,12 +81,8 @@
 		C23F566D2433E49F00BA5180 /* BoostersTestTask */ = {
 			isa = PBXGroup;
 			children = (
-				C23F566E2433E49F00BA5180 /* AppDelegate.swift */,
-				C23F56702433E49F00BA5180 /* SceneDelegate.swift */,
-				C23F56722433E49F00BA5180 /* ContentView.swift */,
-				C23F56742433E4A000BA5180 /* Assets.xcassets */,
-				C23F56792433E4A000BA5180 /* LaunchScreen.storyboard */,
-				C23F567C2433E4A000BA5180 /* Info.plist */,
+				C23F56912433E8F600BA5180 /* MainFlow */,
+				C23F56902433E8D500BA5180 /* Supporting Files */,
 				C23F56762433E4A000BA5180 /* Preview Content */,
 			);
 			path = BoostersTestTask;
@@ -105,6 +103,27 @@
 				C23F56872433E4A000BA5180 /* Info.plist */,
 			);
 			path = BoostersTestTaskTests;
+			sourceTree = "<group>";
+		};
+		C23F56902433E8D500BA5180 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C23F566E2433E49F00BA5180 /* AppDelegate.swift */,
+				C23F56702433E49F00BA5180 /* SceneDelegate.swift */,
+				C23F56742433E4A000BA5180 /* Assets.xcassets */,
+				C23F56792433E4A000BA5180 /* LaunchScreen.storyboard */,
+				C23F567C2433E4A000BA5180 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C23F56912433E8F600BA5180 /* MainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				C23F56722433E49F00BA5180 /* MainView.swift */,
+				C23F56922433E9A600BA5180 /* MainViewModel.swift */,
+			);
+			path = MainFlow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +229,8 @@
 			files = (
 				C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */,
 				C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */,
-				C23F56732433E49F00BA5180 /* ContentView.swift in Sources */,
+				C23F56732433E49F00BA5180 /* MainView.swift in Sources */,
+				C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +386,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BoostersTestTask/Preview Content\"";
 				DEVELOPMENT_TEAM = N7NXQP59J5;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BoostersTestTask/Info.plist;
+				INFOPLIST_FILE = "BoostersTestTask/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,7 +406,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"BoostersTestTask/Preview Content\"";
 				DEVELOPMENT_TEAM = N7NXQP59J5;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BoostersTestTask/Info.plist;
+				INFOPLIST_FILE = "BoostersTestTask/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
