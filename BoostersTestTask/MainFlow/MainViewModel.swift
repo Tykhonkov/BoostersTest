@@ -6,8 +6,10 @@
 //  Copyright © 2020 Elias. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 class MainViewModel: ObservableObject {
+    
+    @Published private(set) var statusString: String = "Idle"
     
 }
