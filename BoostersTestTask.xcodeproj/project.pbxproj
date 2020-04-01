@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C224BE302434991B000528E9 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C224BE2F2434991B000528E9 /* Formatters.swift */; };
 		C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F566E2433E49F00BA5180 /* AppDelegate.swift */; };
 		C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56702433E49F00BA5180 /* SceneDelegate.swift */; };
 		C23F56732433E49F00BA5180 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56722433E49F00BA5180 /* MainView.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C224BE2F2434991B000528E9 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		C23F566B2433E49F00BA5180 /* BoostersTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostersTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23F566E2433E49F00BA5180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C23F56702433E49F00BA5180 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				C23F56912433E8F600BA5180 /* MainFlow */,
 				C23F56902433E8D500BA5180 /* Supporting Files */,
 				C23F56762433E4A000BA5180 /* Preview Content */,
+				C224BE2F2434991B000528E9 /* Formatters.swift */,
 			);
 			path = BoostersTestTask;
 			sourceTree = "<group>";
@@ -142,6 +145,8 @@
 			dependencies = (
 			);
 			name = BoostersTestTask;
+			packageProductDependencies = (
+			);
 			productName = BoostersTestTask;
 			productReference = C23F566B2433E49F00BA5180 /* BoostersTestTask.app */;
 			productType = "com.apple.product-type.application";
@@ -192,6 +197,8 @@
 				Base,
 			);
 			mainGroup = C23F56622433E49E00BA5180;
+			packageReferences = (
+			);
 			productRefGroup = C23F566C2433E49F00BA5180 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -230,6 +237,7 @@
 				C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */,
 				C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */,
 				C23F56732433E49F00BA5180 /* MainView.swift in Sources */,
+				C224BE302434991B000528E9 /* Formatters.swift in Sources */,
 				C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
