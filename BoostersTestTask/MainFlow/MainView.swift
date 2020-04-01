@@ -10,9 +10,10 @@ import SwiftUI
 
 struct MainView: View {
     
-    @ObservedObject var viewModel: MainViewModel
     @ObservedObject private var viewModel: MainViewModel
     @State private var presentingActionSheet = false
+    @State private var presentingDatePicker = false
+    @State private var startDate = Calendar.current.startOfDay(for: Date())
     
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -28,37 +29,44 @@ struct MainView: View {
                     Text("Sleep Timer").padding()
                     Spacer()
                     Button(action: {
-                        
+                        self.presentingActionSheet = true
                     }, label: {
                         Text("Sleep Timer")
-                    }).padding()
+                    })
+                        .padding()
+                        .actionSheet(isPresented: $presentingActionSheet, content: sleepTimerActionSheet)
                 }
                 Divider()
                 HStack {
                     Text("Alarm").padding()
                     Spacer()
                     Button(action: {
-                        
+                        self.presentingDatePicker = true
                     }, label: {
-                        Text("Alarm date text")
-                    }).padding()
+                        Text(self.viewModel.alarmTimeString)
+                    })
+                        .padding()
                 }
                 Divider()
             }
             HStack {
                 Button(action: {
                     
-                    }, label: {
-                        Text("Pause")
-                            .foregroundColor(Color.white)
+                }, label: {
+                    Text("Pause")
+                        .foregroundColor(Color.white)
                         .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding()
-                        .background(/*@START_MENU_TOKEN@*/Color.blue/*@END_MENU_TOKEN@*/)
-                        .cornerRadius(/*@START_MENU_TOKEN@*/7.0/*@END_MENU_TOKEN@*/)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(7.0)
                 })
                     .padding(.all)
             }
-        }.padding()
+            }
+        .padding()
+        .sheet(isPresented: $presentingDatePicker, onDismiss: {
+            self.startDate = self.viewModel.alarmTime
+        },content: datePickerSheet)
     }
     
 }
@@ -70,18 +78,46 @@ private extension MainView {
     }
     
     func sleepTimerActionSheet() -> ActionSheet {
-       var buttons = viewModel.sleepTimerDurationsStrings.enumerated()
+        var buttons = viewModel.sleepTimerDurationsStrings.enumerated()
             .map { (offset: Int, element: String) in
                 ActionSheet.Button.default(Text(element)) {
                     self.viewModel.timerDurationSelected(at: offset)
                 }
         }
         buttons.append(Alert.Button.cancel())
-    
+        
         return ActionSheet(
             title: Text("Sleep timer").foregroundColor(.gray),
             buttons: buttons
         )
+    }
+    
+    func datePickerSheet() -> some View {
+        return VStack {
+            HStack {
+                Button(action: {
+                    self.presentingDatePicker = false
+                    self.startDate = self.viewModel.alarmTime
+                }, label: {
+                    Text("Cancel")
+                })
+                Spacer()
+                Text("Alarm")
+                Spacer()
+                Button(action: {
+                    self.presentingDatePicker = false
+                    self.viewModel.alarmTime = self.startDate
+                }, label: {
+                    Text("Done")
+                })
+            }.padding()
+            Spacer()
+            DatePicker("",
+                       selection: self.$startDate,
+                       displayedComponents: .hourAndMinute)
+                .labelsHidden()
+            Spacer()
+        }
     }
     
 }
