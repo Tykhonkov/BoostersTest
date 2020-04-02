@@ -10,6 +10,7 @@
 		C224BE302434991B000528E9 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C224BE2F2434991B000528E9 /* Formatters.swift */; };
 		C22D7830243630C1006E0BFF /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D782F243630C1006E0BFF /* AudioSession.swift */; };
 		C22D783224363492006E0BFF /* BoostersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D783124363492006E0BFF /* BoostersError.swift */; };
+		C22D783924368ADD006E0BFF /* BoostersAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D783824368ADD006E0BFF /* BoostersAudioRecorder.swift */; };
 		C22D783B24368AEC006E0BFF /* BoostersAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D783A24368AEC006E0BFF /* BoostersAudioPlayer.swift */; };
 		C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F566E2433E49F00BA5180 /* AppDelegate.swift */; };
 		C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56702433E49F00BA5180 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 		C22D783124363492006E0BFF /* BoostersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersError.swift; sourceTree = "<group>"; };
 		C22D783624363B54006E0BFF /* nature.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = nature.mp4; sourceTree = "<group>"; };
 		C22D783724363B5B006E0BFF /* alarm.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.mp4; sourceTree = "<group>"; };
+		C22D783824368ADD006E0BFF /* BoostersAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersAudioRecorder.swift; sourceTree = "<group>"; };
 		C22D783A24368AEC006E0BFF /* BoostersAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersAudioPlayer.swift; sourceTree = "<group>"; };
 		C23F566B2433E49F00BA5180 /* BoostersTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostersTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23F566E2433E49F00BA5180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				C22D782F243630C1006E0BFF /* AudioSession.swift */,
 				C22D783124363492006E0BFF /* BoostersError.swift */,
+				C22D783824368ADD006E0BFF /* BoostersAudioRecorder.swift */,
 				C22D783A24368AEC006E0BFF /* BoostersAudioPlayer.swift */,
 			);
 			path = Core;
@@ -271,6 +274,7 @@
 				C23F56732433E49F00BA5180 /* MainView.swift in Sources */,
 				C224BE302434991B000528E9 /* Formatters.swift in Sources */,
 				C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */,
+				C22D783924368ADD006E0BFF /* BoostersAudioRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
