@@ -30,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		C224BE2F2434991B000528E9 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		C22D783624363B54006E0BFF /* nature.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = nature.mp4; sourceTree = "<group>"; };
+		C22D783724363B5B006E0BFF /* alarm.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.mp4; sourceTree = "<group>"; };
 		C23F566B2433E49F00BA5180 /* BoostersTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostersTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C23F566E2433E49F00BA5180 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C23F56702433E49F00BA5180 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C22D783524363B39006E0BFF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C22D783624363B54006E0BFF /* nature.mp4 */,
+				C22D783724363B5B006E0BFF /* alarm.mp4 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C23F56622433E49E00BA5180 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +94,7 @@
 		C23F566D2433E49F00BA5180 /* BoostersTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				C22D783524363B39006E0BFF /* Resources */,
 				C23F56912433E8F600BA5180 /* MainFlow */,
 				C23F56902433E8D500BA5180 /* Supporting Files */,
 				C23F56762433E4A000BA5180 /* Preview Content */,
