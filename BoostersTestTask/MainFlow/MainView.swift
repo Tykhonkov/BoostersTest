@@ -51,9 +51,9 @@ private extension MainView {
     
     var stateSwitcherButton: some View {
         Button(action: {
-            
+            self.viewModel.stateSwitcherButtonAction()
         }, label: {
-            Text("Pause")
+            Text("Play")
                 .foregroundColor(Color.white)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()

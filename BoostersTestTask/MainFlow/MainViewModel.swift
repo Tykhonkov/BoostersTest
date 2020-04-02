@@ -23,19 +23,24 @@ class MainViewModel: ObservableObject {
     @Published var alarmTime: Date?
     @Published var isRecordingEnabled = true
     @Published private(set) var statusString: String = "Idle"
-    @Published private(set) var sleepTimerString: String = "Idle"
 
-    private let disposables = Set<AnyCancellable>()
+    private var currentSleepTimerDurationIndex: Int
+    private var disposables = Set<AnyCancellable>()
 
     private let sleepTimerDurations: [Int] = [0, 1, 5, 10, 15, 20]
-    private var currentSleepTimerDurationIndex: Int
-
-    init() {
+    private let audioSession: AudioSession
+    
+    init(audioSession: AudioSession = AudioSession()) {
+        self.audioSession = audioSession
         currentSleepTimerDurationIndex = sleepTimerDurations.count - 1
     }
 
     func timerDurationSelected(at row: Int) {
         currentSleepTimerDurationIndex = row
+    }
+    
+    func stateSwitcherButtonAction() {
+        
     }
     
 }
