@@ -13,6 +13,7 @@ struct MainView: View {
     @ObservedObject private var viewModel: MainViewModel
     @State private var presentingActionSheet = false
     @State private var presentingDatePicker = false
+    @State private var isRecordingEnabled = false
     @State private var startDate = Calendar.current.startOfDay(for: Date())
     
     init(viewModel: MainViewModel) {
@@ -21,9 +22,16 @@ struct MainView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             statusLabel.padding()
             Spacer()
             VStack {
+                Divider()
+                HStack {
+                    Toggle(isOn: $isRecordingEnabled) {
+                        Text("Enable recoording")
+                    }.padding()
+                }
                 Divider()
                 HStack {
                     Text("Sleep Timer").padding()
@@ -62,7 +70,7 @@ struct MainView: View {
                 })
                     .padding(.all)
             }
-            }
+        }
         .padding()
         .sheet(isPresented: $presentingDatePicker, onDismiss: {
             self.startDate = self.viewModel.alarmTime
@@ -110,11 +118,14 @@ private extension MainView {
                 }, label: {
                     Text("Done")
                 })
-            }.padding()
+            }
+            .padding()
             Spacer()
-            DatePicker("",
-                       selection: self.$startDate,
-                       displayedComponents: .hourAndMinute)
+            DatePicker(
+                "",
+                selection: self.$startDate,
+                displayedComponents: .hourAndMinute
+            )
                 .labelsHidden()
             Spacer()
         }
