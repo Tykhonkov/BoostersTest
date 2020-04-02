@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C224BE302434991B000528E9 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C224BE2F2434991B000528E9 /* Formatters.swift */; };
+		C22D7830243630C1006E0BFF /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D782F243630C1006E0BFF /* AudioSession.swift */; };
+		C22D783224363492006E0BFF /* BoostersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D783124363492006E0BFF /* BoostersError.swift */; };
 		C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F566E2433E49F00BA5180 /* AppDelegate.swift */; };
 		C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56702433E49F00BA5180 /* SceneDelegate.swift */; };
 		C23F56732433E49F00BA5180 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F56722433E49F00BA5180 /* MainView.swift */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		C224BE2F2434991B000528E9 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		C22D782F243630C1006E0BFF /* AudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSession.swift; sourceTree = "<group>"; };
+		C22D783124363492006E0BFF /* BoostersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersError.swift; sourceTree = "<group>"; };
 		C22D783624363B54006E0BFF /* nature.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = nature.mp4; sourceTree = "<group>"; };
 		C22D783724363B5B006E0BFF /* alarm.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.mp4; sourceTree = "<group>"; };
 		C23F566B2433E49F00BA5180 /* BoostersTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostersTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C22D782E24362FDA006E0BFF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C22D782F243630C1006E0BFF /* AudioSession.swift */,
+				C22D783124363492006E0BFF /* BoostersError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		C22D783524363B39006E0BFF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,7 @@
 			children = (
 				C22D783524363B39006E0BFF /* Resources */,
 				C23F56912433E8F600BA5180 /* MainFlow */,
+				C22D782E24362FDA006E0BFF /* Core */,
 				C23F56902433E8D500BA5180 /* Supporting Files */,
 				C23F56762433E4A000BA5180 /* Preview Content */,
 				C224BE2F2434991B000528E9 /* Formatters.swift */,
@@ -246,8 +260,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C22D7830243630C1006E0BFF /* AudioSession.swift in Sources */,
 				C23F566F2433E49F00BA5180 /* AppDelegate.swift in Sources */,
 				C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */,
+				C22D783224363492006E0BFF /* BoostersError.swift in Sources */,
 				C23F56732433E49F00BA5180 /* MainView.swift in Sources */,
 				C224BE302434991B000528E9 /* Formatters.swift in Sources */,
 				C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */,
