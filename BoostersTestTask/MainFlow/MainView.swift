@@ -11,9 +11,8 @@ import SwiftUI
 struct MainView: View {
     
     @ObservedObject private var viewModel: MainViewModel
-    @State private var presentingActionSheet = false
-    @State private var presentingDatePicker = false
-    @State private var isRecordingEnabled = false
+    @State private var isPresentingActionSheet = false
+    @State private var isPresentingDatePicker = false
     @State private var startDate = Calendar.current.startOfDay(for: Date())
     
     init(viewModel: MainViewModel) {
@@ -27,64 +26,79 @@ struct MainView: View {
             Spacer()
             VStack {
                 Divider()
-                HStack {
-                    Toggle(isOn: $isRecordingEnabled) {
-                        Text("Enable recoording")
-                    }.padding()
-                }
+                recordingTogglerRow
                 Divider()
-                HStack {
-                    Text("Sleep Timer").padding()
-                    Spacer()
-                    Button(action: {
-                        self.presentingActionSheet = true
-                    }, label: {
-                        Text("Sleep Timer")
-                    })
-                        .padding()
-                        .actionSheet(isPresented: $presentingActionSheet, content: sleepTimerActionSheet)
-                }
+                sleepTimerRow
                 Divider()
-                HStack {
-                    Text("Alarm").padding()
-                    Spacer()
-                    Button(action: {
-                        self.presentingDatePicker = true
-                    }, label: {
-                        Text(self.viewModel.alarmTimeString)
-                    })
-                        .padding()
-                }
+                alarmTimeRow
                 Divider()
-            }
-            HStack {
-                Button(action: {
-                    
-                }, label: {
-                    Text("Pause")
-                        .foregroundColor(Color.white)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(7.0)
-                })
-                    .padding(.all)
+                stateSwitcherButton
             }
         }
         .padding()
-        .sheet(isPresented: $presentingDatePicker, onDismiss: {
-            self.startDate = self.viewModel.alarmTime
-        },content: datePickerSheet)
+        .sheet(
+            isPresented: $isPresentingDatePicker,
+            onDismiss: {
+                self.startDate = self.viewModel.alarmTime ?? Calendar.current.startOfDay(for: Date())
+        },
+            content: datePickerSheet
+        )
     }
     
 }
 
 private extension MainView {
     
+    var stateSwitcherButton: some View {
+        Button(action: {
+            
+        }, label: {
+            Text("Pause")
+                .foregroundColor(Color.white)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(7.0)
+        })
+            .padding(.all)
+    }
+    var recordingTogglerRow: some View {
+        HStack {
+            Toggle(isOn: $viewModel.isRecordingEnabled) {
+                Text("Enable recoording")
+            }
+            .padding()
+        }
+    }
+    var sleepTimerRow: some View {
+        HStack {
+            Text("Sleep Timer").padding()
+            Spacer()
+            Button(action: {
+                self.isPresentingActionSheet = true
+            }, label: {
+                Text(viewModel.currentSleepTimerDurationString)
+            })
+                .padding()
+                .actionSheet(isPresented: $isPresentingActionSheet, content: sleepTimerActionSheet)
+        }
+    }
+    var alarmTimeRow: some View {
+        HStack {
+            Text("Alarm").padding()
+            Spacer()
+            Button(action: {
+                self.isPresentingDatePicker = true
+            }, label: {
+                Text(self.viewModel.alarmTimeString)
+            })
+                .padding()
+        }
+    }
     var statusLabel: some View {
         Text(viewModel.statusString).font(.title).lineLimit(nil).padding(.top)
     }
-    
+
     func sleepTimerActionSheet() -> ActionSheet {
         var buttons = viewModel.sleepTimerDurationsStrings.enumerated()
             .map { (offset: Int, element: String) in
@@ -101,11 +115,11 @@ private extension MainView {
     }
     
     func datePickerSheet() -> some View {
-        return VStack {
+        VStack {
             HStack {
                 Button(action: {
-                    self.presentingDatePicker = false
-                    self.startDate = self.viewModel.alarmTime
+                    self.isPresentingDatePicker = false
+                    self.startDate = self.viewModel.alarmTime ?? Calendar.current.startOfDay(for: Date())
                 }, label: {
                     Text("Cancel")
                 })
@@ -113,7 +127,7 @@ private extension MainView {
                 Text("Alarm")
                 Spacer()
                 Button(action: {
-                    self.presentingDatePicker = false
+                    self.isPresentingDatePicker = false
                     self.viewModel.alarmTime = self.startDate
                 }, label: {
                     Text("Done")

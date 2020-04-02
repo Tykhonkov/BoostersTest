@@ -12,20 +12,30 @@ import Foundation
 class MainViewModel: ObservableObject {
     
     var alarmTimeString: String  {
-        return timeFormatter.string(from: alarmTime)
+        return alarmTime.map { timeFormatter.string(from: $0) } ?? "not set"
     }
-    @Published var alarmTime: Date = Date()
-    @Published private(set) var statusString: String = "Idle"
-    
-    private var disposables = Set<AnyCancellable>()
-
+    var currentSleepTimerDurationString: String {
+        return sleepTimerDurationsStrings[currentSleepTimerDurationIndex]
+    }
     var sleepTimerDurationsStrings: [String] {
         return sleepTimerDurations.enumerated().map { $0.offset == 0 ? "off" : String("\($0.element) min") }
     }
+    @Published var alarmTime: Date?
+    @Published var isRecordingEnabled = true
+    @Published private(set) var statusString: String = "Idle"
+    @Published private(set) var sleepTimerString: String = "Idle"
+
+    private let disposables = Set<AnyCancellable>()
+
     private let sleepTimerDurations: [Int] = [0, 1, 5, 10, 15, 20]
+    private var currentSleepTimerDurationIndex: Int
+
+    init() {
+        currentSleepTimerDurationIndex = sleepTimerDurations.count - 1
+    }
 
     func timerDurationSelected(at row: Int) {
-        //        sleepTimerDurations[row] handle  new sleep timer duration
+        currentSleepTimerDurationIndex = row
     }
     
 }
