@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             audioSession: AudioSession(),
             audioPlayer: BoostersAudioPlayer(),
             audioRecorder: BoostersAudioRecorder(),
+            notificationsManager: NotificationsManager(),
             soundFileURL: soundFileURL,
             alarmSoundName: "alarm.mp4",
             sleepSoundDuratioon: 20 * 60,

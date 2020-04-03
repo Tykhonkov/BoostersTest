@@ -9,6 +9,9 @@
 import Combine
 import Foundation
 
+private let dayInSeconds: TimeInterval = 60 * 60 * 24
+private let alarmNotificationIdentifier: String = "alarm"
+
 class BoostersWorkflowCoordinator {
     
     enum BoostersState {
@@ -36,13 +39,16 @@ class BoostersWorkflowCoordinator {
     private var sleepSoundDuratioon: TimeInterval
     private var isRecordingEnabled: Bool
     
+    private let notificationsManager: NotificationsManager
+    
     private let audioSession: AudioSession
     private let audioPlayer: BoostersAudioPlayer
     private let audioRecorder: BoostersAudioRecorder
     private var soundFileURL: URL
     private let alarmSoundName: String
-    
-    private var disposables = Set<AnyCancellable>()
+
+    private let alarmNotificationId: String = "alarm"
+    private var disposables: Set<AnyCancellable> = Set<AnyCancellable>()
     
     init(configuration: BoostersCoordinatorConfiguration) {
         self.audioSession = configuration.audioSession
@@ -61,7 +67,19 @@ class BoostersWorkflowCoordinator {
     }
     
     func set(alarmDate: Date) {
+        var alarmDate = alarmDate
+        if alarmDate.timeIntervalSinceNow < 0 {
+            alarmDate = alarmDate.addingTimeInterval(dayInSeconds)
+        }
+        notificationsManager.removePendingNotification(with: alarmNotificationIdentifier)
+        notificationsManager.scheduleNotification(
+            at: alarmDate,
+            soundName: alarmSoundName,
+            identifier: alarmNotificationIdentifier,
+            title: "Alarm",
+            subtitle: "Wake up! 🌞") { _ in
         
+        }
     }
     
     /// Only possible to set while in initial or idle state
@@ -99,6 +117,13 @@ class BoostersWorkflowCoordinator {
             resumeRecording()
             state = .recording
         case (.alarm, .stateButtonAction): break
+            // stop alarm
+        case (.recording, .receivedLocalNotification),
+             (.playing, .receivedLocalNotification),
+             (.recordingPaused, .receivedLocalNotification),
+             (.playingPaused, .receivedLocalNotification),
+             (.idle, .receivedLocalNotification): break
+            // initiate alarm flow
             
         default:
             print("State is not handled")
@@ -110,6 +135,9 @@ class BoostersWorkflowCoordinator {
         do {
             try audioSession.prepare()
             audioSession.requestRecordsPermissionIfNeeded()
+                .flatMap { [unowned self] in
+                    return self.notificationsManager.requestNotificationsAuthorizationIfNeeded()
+                }
                 .sink(receiveCompletion: { [unowned self] completion in
                     switch completion {
                     case .failure:

@@ -159,6 +159,7 @@ struct MainView_Previews: PreviewProvider {
             audioSession: AudioSession(),
             audioPlayer: BoostersAudioPlayer(),
             audioRecorder: BoostersAudioRecorder(),
+            notificationsManager: NotificationsManager(),
             soundFileURL: soundFileURL,
             alarmSoundName: "alarm.mp4",
             sleepSoundDuratioon: 20*60,
