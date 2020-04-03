@@ -163,7 +163,7 @@ struct MainView_Previews: PreviewProvider {
             alarmSoundName: "alarm.mp4",
             sleepSoundDuratioon: 20*60,
             shouldPlayNatureSound: true,
-            shouldRecord: true
+            isRecordingEnabled: true
         )
         
         let viewModel = MainViewModel(workflowCoordinator: BoostersWorkflowCoordinator(configuration: configuration))

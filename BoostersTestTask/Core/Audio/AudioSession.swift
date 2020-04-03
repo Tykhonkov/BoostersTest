@@ -38,14 +38,14 @@ class AudioSession: NSObject {
                         if allowed {
                             promise(.success(()))
                         } else {
-                            promise(.failure(BoostersError.permissionDeniedError))
+                            promise(.failure(BoostersError.microphoneUsagePermissionError))
                         }
                     }
                 }
             case .granted:
                 promise(.success(()))
             case .denied:
-                promise(.failure(BoostersError.permissionDeniedError))
+                promise(.failure(BoostersError.microphoneUsagePermissionError))
             @unknown default:
                 fatalError("undefined case")
             }

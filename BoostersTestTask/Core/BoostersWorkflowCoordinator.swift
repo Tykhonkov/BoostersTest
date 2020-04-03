@@ -16,24 +16,25 @@ class BoostersWorkflowCoordinator {
     }
     
     enum BoostersStateInputs {
-        case stateButtonAction, finishedPlayingSound, recievedLocalNotification
+        case stateButtonAction, finishedPlayingSound, receivedLocalNotification
     }
     
     struct BoostersCoordinatorConfiguration {
         var audioSession: AudioSession
         var audioPlayer: BoostersAudioPlayer
         var audioRecorder: BoostersAudioRecorder
+        var notificationsManager: NotificationsManager
         var soundFileURL: URL
         var alarmSoundName: String
         var sleepSoundDuratioon: TimeInterval
         var shouldPlayNatureSound: Bool
-        var shouldRecord: Bool
+        var isRecordingEnabled: Bool
     }
     
     @Published private(set) var state: BoostersState = .initial
     
     private var sleepSoundDuratioon: TimeInterval
-    private var shouldRecord: Bool
+    private var isRecordingEnabled: Bool
     
     private let audioSession: AudioSession
     private let audioPlayer: BoostersAudioPlayer
@@ -50,7 +51,8 @@ class BoostersWorkflowCoordinator {
         self.soundFileURL = configuration.soundFileURL
         self.alarmSoundName = configuration.alarmSoundName
         self.sleepSoundDuratioon = configuration.sleepSoundDuratioon
-        self.shouldRecord = configuration.shouldRecord
+        self.isRecordingEnabled = configuration.isRecordingEnabled
+        self.notificationsManager = configuration.notificationsManager
     }
     
     /// Only possible to set while in initial or idle state
@@ -58,14 +60,13 @@ class BoostersWorkflowCoordinator {
         self.sleepSoundDuratioon = duration
     }
     
-    /// Only possible to set while in initial or idle state
     func set(alarmDate: Date) {
         
     }
     
     /// Only possible to set while in initial or idle state
     func set(recording enabled: Bool) {
-        shouldRecord = enabled
+        isRecordingEnabled = enabled
     }
     
     func handleInput(_ input: BoostersStateInputs) {
@@ -74,22 +75,21 @@ class BoostersWorkflowCoordinator {
         switch (state, input) {
         case (.initial, .stateButtonAction):
             initialPreparations()
-        case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && shouldRecord:
+        case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && isRecordingEnabled:
             record()
-        case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && !shouldRecord:
+        case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && !isRecordingEnabled:
             break // wait for alarm
         case (.idle, .stateButtonAction):
             self.playSoundInLoop(contentsOf: soundFileURL, with: sleepSoundDuratioon)
-
         case (.playing, .stateButtonAction):
             pauseSound()
             state = .playingPaused
         case (.playingPaused, .stateButtonAction):
             resumePlaying()
             state = .playing
-        case (.playing, .finishedPlayingSound) where shouldRecord:
+        case (.playing, .finishedPlayingSound) where isRecordingEnabled:
             record()
-        case (.playing, .finishedPlayingSound) where !shouldRecord:
+        case (.playing, .finishedPlayingSound) where !isRecordingEnabled:
                     state = .idle
             break
         case (.recording, .stateButtonAction):
@@ -101,12 +101,12 @@ class BoostersWorkflowCoordinator {
         case (.alarm, .stateButtonAction): break
             
         default:
-            print("State not handled")
+            print("State is not handled")
         }
         print("Result state: \(state)")
     }
     
-    func initialPreparations() {
+   private func initialPreparations() {
         do {
             try audioSession.prepare()
             audioSession.requestRecordsPermissionIfNeeded()
@@ -118,7 +118,7 @@ class BoostersWorkflowCoordinator {
                         self.state = .idle
                         self.handleInput(.stateButtonAction)
                     }
-                    }, receiveValue: { _ in
+                }, receiveValue: { _ in
                         
                 }).store(in: &disposables)
         } catch {
@@ -160,7 +160,7 @@ class BoostersWorkflowCoordinator {
         audioRecorder.pause()
     }
 
-    private  func resumeRecording() {
+    private func resumeRecording() {
         audioRecorder.resume()
     }
     

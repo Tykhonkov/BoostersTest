@@ -11,6 +11,7 @@ import Foundation
 enum BoostersError: Error {
     
     case audioSessionError(string: String)
-    case permissionDeniedError
+    case microphoneUsagePermissionError
+    case notificationsAuthorizationError
 
 }
