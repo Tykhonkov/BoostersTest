@@ -8,22 +8,13 @@
 
 import AVFoundation
 import Combine
- 
+
+
 class AudioSession: NSObject {
     
-    enum AudioSessionState: String {
-        case idle
-        case playing
-        case recording
-        case paused
-    }
-    
-    @Published private(set) var state: AudioSessionState = .idle
     private let audioSession: AVAudioSession
     
-    init(
-        audioSession: AVAudioSession = AVAudioSession.sharedInstance()
-    ) {
+    init(audioSession: AVAudioSession = AVAudioSession.sharedInstance()) {
         self.audioSession = audioSession
         
         super.init()
@@ -63,3 +54,4 @@ class AudioSession: NSObject {
     }
     
 }
+

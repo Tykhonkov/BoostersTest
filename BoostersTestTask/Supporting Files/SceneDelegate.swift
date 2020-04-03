@@ -20,7 +20,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let viewModel = MainViewModel()
+        
+        let soundPath = Bundle.main.path(forResource: "nature.mp4", ofType: nil)!
+        let soundFileURL = URL(fileURLWithPath: soundPath)
+        
+        let configuration = BoostersWorkflowCoordinator.BoostersCoordinatorConfiguration(
+            audioSession: AudioSession(),
+            audioPlayer: BoostersAudioPlayer(),
+            audioRecorder: BoostersAudioRecorder(),
+            soundFileURL: soundFileURL,
+            alarmSoundName: "alarm.mp4",
+            sleepSoundDuratioon: 20 * 60,
+            shouldPlayNatureSound: true,
+            shouldRecord: true
+        )
+        
+        let viewModel = MainViewModel(workflowCoordinator: BoostersWorkflowCoordinator(configuration: configuration))
         let mainView = MainView(viewModel: viewModel)
 
         // Use a UIHostingController as window root view controller.
