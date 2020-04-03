@@ -32,8 +32,10 @@ struct MainView: View {
                 Divider()
                 alarmTimeRow
                 Divider()
-                stateSwitcherButton
+                
             }
+            .disabled(viewModel.isControlsDissabled)
+            stateSwitcherButton
         }
         .padding()
         .sheet(
@@ -53,7 +55,7 @@ private extension MainView {
         Button(action: {
             self.viewModel.stateSwitcherButtonAction()
         }, label: {
-            Text("Play")
+            Text(viewModel.stateButtonSwitcherTitle)
                 .foregroundColor(Color.white)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
@@ -150,7 +152,22 @@ private extension MainView {
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: MainViewModel())
+        let soundPath = Bundle.main.path(forResource: "nature.mp4", ofType: nil)!
+        let soundFileURL = URL(fileURLWithPath: soundPath)
+        
+        let configuration = BoostersWorkflowCoordinator.BoostersCoordinatorConfiguration(
+            audioSession: AudioSession(),
+            audioPlayer: BoostersAudioPlayer(),
+            audioRecorder: BoostersAudioRecorder(),
+            soundFileURL: soundFileURL,
+            alarmSoundName: "alarm.mp4",
+            sleepSoundDuratioon: 20*60,
+            shouldPlayNatureSound: true,
+            shouldRecord: true
+        )
+        
+        let viewModel = MainViewModel(workflowCoordinator: BoostersWorkflowCoordinator(configuration: configuration))
+        return MainView(viewModel: viewModel)
     }
 }
 #endif
