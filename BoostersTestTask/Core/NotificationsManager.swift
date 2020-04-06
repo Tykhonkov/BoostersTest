@@ -12,7 +12,7 @@ import UIKit
 
 class NotificationsManager: NSObject {
     
-    @Published var receivedNotification: UNNotification!
+    @Published private(set) var receivedNotification: UNNotification?
     private let center: UNUserNotificationCenter
     private let application: UIApplication
 
@@ -41,7 +41,7 @@ class NotificationsManager: NSObject {
                 case .denied:
                     promise(.failure(BoostersError.notificationsAuthorizationError))
                 case .notDetermined:
-                    self.center.requestAuthorization(options: [.sound, .alert]) { (isGranted, error) in
+                    self.center.requestAuthorization(options: [.sound, .alert]) { isGranted, _ in
                         if isGranted {
                             promise(.success(()))
                         } else {
@@ -103,4 +103,3 @@ extension NotificationsManager: UNUserNotificationCenterDelegate {
     }
     
 }
-

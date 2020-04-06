@@ -20,8 +20,8 @@ class BoostersAudioPlayer {
     
     func playInLoop(contentsOf url: URL, with duration: TimeInterval, completion: @escaping () -> Void) throws {
         audioPlayer = try AVAudioPlayer(contentsOf: url)
-        audioPlayer!.numberOfLoops = -1
-        audioPlayer!.play()
+        audioPlayer?.numberOfLoops = -1
+        audioPlayer?.play()
         
         remainingPlayingDuration = duration
         timerScheduledAtDate = Date()
@@ -55,7 +55,7 @@ class BoostersAudioPlayer {
     }
     
     private func scheduleTimer(duration: TimeInterval) {
-        timer = Timer.scheduledTimer(withTimeInterval: remainingPlayingDuration, repeats: false) { [unowned self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: remainingPlayingDuration, repeats: false) { [unowned self] _ in
             self.stop()
             self.playingFinished?()
         }

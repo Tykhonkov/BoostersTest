@@ -9,14 +9,13 @@
 import AVFoundation
 import Combine
 
-
 class AudioSession: NSObject {
     
     enum Interruption {
         case began, ended
     }
     
-    @Published var interruption: Interruption!
+    @Published private(set) var interruption: Interruption?
     private let audioSession: AVAudioSession
     
     init(audioSession: AVAudioSession = AVAudioSession.sharedInstance()) {
@@ -40,7 +39,7 @@ class AudioSession: NSObject {
         return Future { [unowned self] promise in
             switch self.audioSession.recordPermission {
             case .undetermined:
-                self.audioSession.requestRecordPermission() { allowed in
+                self.audioSession.requestRecordPermission { allowed in
                     DispatchQueue.main.async {
                         if allowed {
                             promise(.success(()))

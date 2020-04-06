@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 let timeFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm a"

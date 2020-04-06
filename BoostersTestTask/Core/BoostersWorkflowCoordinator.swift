@@ -64,16 +64,16 @@ class BoostersWorkflowCoordinator {
         self.alarmSoundURL = configuration.alarmSoundURL
         
         notificationsManager.$receivedNotification
-            .sink() { [unowned self] notification in
+            .sink { [unowned self] notification in
                 guard notification != nil else { return }
                 self.handleInput(.receivedAlarmNotification)
-        }
+            }
         .store(in: &disposables)
         audioSession.$interruption
-            .sink() { [unowned self] interruption in
+            .sink { [unowned self] interruption in
                 guard let interruption = interruption else { return }
                 self.handleInput(BoostersWorkflowCoordinator.BoostersStateInputs.interruption(interruption: interruption))
-        }
+            }
         .store(in: &disposables)
         initialPreparations()
     }
@@ -104,7 +104,7 @@ class BoostersWorkflowCoordinator {
                 case .failure: break
                     // error handling
                 }
-            }, receiveValue: {  _ in })
+            }, receiveValue: { _ in })
             .store(in: &disposables)
     }
     

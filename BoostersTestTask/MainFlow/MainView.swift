@@ -42,7 +42,7 @@ struct MainView: View {
             isPresented: $isPresentingDatePicker,
             onDismiss: {
                 self.startDate = self.viewModel.alarmTime ?? Calendar.current.startOfDay(for: Date())
-        },
+            },
             content: datePickerSheet
         )
     }
@@ -107,7 +107,7 @@ private extension MainView {
                 ActionSheet.Button.default(Text(element)) {
                     self.viewModel.timerDurationSelected(at: offset)
                 }
-        }
+            }
         buttons.append(Alert.Button.cancel())
         
         return ActionSheet(
@@ -152,10 +152,8 @@ private extension MainView {
 #if DEBUG
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        let soundPath = Bundle.main.path(forResource: "nature.mp4", ofType: nil)!
-        let soundFileURL = URL(fileURLWithPath: soundPath)
-        let alarmSoundPath = Bundle.main.path(forResource: "alarm.mp4", ofType: nil)!
-        let alarmSoundFileURL = URL(fileURLWithPath: alarmSoundPath)
+        let soundFileURL = Bundle.main.resourceURL("nature.mp4")
+        let alarmSoundFileURL = Bundle.main.resourceURL("alarm.mp4")
 
         let configuration = BoostersWorkflowCoordinator.BoostersCoordinatorConfiguration(
             audioSession: AudioSession(),
@@ -165,7 +163,7 @@ struct MainView_Previews: PreviewProvider {
             soundFileURL: soundFileURL,
             alarmSoundName: "alarm.mp4",
             alarmSoundURL: alarmSoundFileURL,
-            sleepSoundDuratioon: 20*60,
+            sleepSoundDuratioon: 20 * 60,
             shouldPlayNatureSound: true,
             isRecordingEnabled: true
         )

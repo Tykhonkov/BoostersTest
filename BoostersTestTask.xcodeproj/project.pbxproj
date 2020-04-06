@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C215ABE7243A78A3000F78C8 /* alarm.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C22D783724363B5B006E0BFF /* alarm.mp4 */; };
 		C215ABEB243A7D86000F78C8 /* alarm3.aifc in Resources */ = {isa = PBXBuildFile; fileRef = C215ABEA243A7D72000F78C8 /* alarm3.aifc */; };
+		C215ABEE243B92F3000F78C8 /* Bundle+ResourceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C215ABED243B92F3000F78C8 /* Bundle+ResourceURL.swift */; };
 		C224BE302434991B000528E9 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = C224BE2F2434991B000528E9 /* Formatters.swift */; };
 		C22D7830243630C1006E0BFF /* AudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D782F243630C1006E0BFF /* AudioSession.swift */; };
 		C22D783224363492006E0BFF /* BoostersError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22D783124363492006E0BFF /* BoostersError.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		C215ABEA243A7D72000F78C8 /* alarm3.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm3.aifc; sourceTree = "<group>"; };
+		C215ABED243B92F3000F78C8 /* Bundle+ResourceURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+ResourceURL.swift"; sourceTree = "<group>"; };
 		C224BE2F2434991B000528E9 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		C22D782F243630C1006E0BFF /* AudioSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSession.swift; sourceTree = "<group>"; };
 		C22D783124363492006E0BFF /* BoostersError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoostersError.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				C22D784224376FAF006E0BFF /* FileManager+Directories.swift */,
+				C215ABED243B92F3000F78C8 /* Bundle+ResourceURL.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				C23F56672433E49F00BA5180 /* Sources */,
 				C23F56682433E49F00BA5180 /* Frameworks */,
 				C23F56692433E49F00BA5180 /* Resources */,
+				C215ABEC243B8A17000F78C8 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -294,6 +298,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C215ABEC243B8A17000F78C8 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${SRCROOT}/swiftlint/swiftlint autocorrect\n${SRCROOT}/swiftlint/swiftlint\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C23F56672433E49F00BA5180 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -307,6 +332,7 @@
 				C23F56712433E49F00BA5180 /* SceneDelegate.swift in Sources */,
 				C22D783224363492006E0BFF /* BoostersError.swift in Sources */,
 				C23F56732433E49F00BA5180 /* MainView.swift in Sources */,
+				C215ABEE243B92F3000F78C8 /* Bundle+ResourceURL.swift in Sources */,
 				C224BE302434991B000528E9 /* Formatters.swift in Sources */,
 				C23F56932433E9A600BA5180 /* MainViewModel.swift in Sources */,
 				C22D783F24376F03006E0BFF /* BoostersWorkflowCoordinator.swift in Sources */,
