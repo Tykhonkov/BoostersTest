@@ -176,7 +176,6 @@ class BoostersWorkflowCoordinator {
                         break
                     case .finished:
                         self.state = .idle
-                        self.handleInput(.stateButtonAction)
                     }
                 }, receiveValue: { _ in
                         
