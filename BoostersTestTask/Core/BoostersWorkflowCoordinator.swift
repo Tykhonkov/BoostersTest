@@ -19,7 +19,7 @@ class BoostersWorkflowCoordinator {
     }
     
     enum BoostersStateInputs {
-        case stateButtonAction, finishedPlayingSound, receivedLocalNotification
+        case stateButtonAction, finishedPlayingSound, receivedAlarmNotification, interruption(interruption: AudioSession.Interruption)
     }
     
     struct BoostersCoordinatorConfiguration {
@@ -29,6 +29,7 @@ class BoostersWorkflowCoordinator {
         var notificationsManager: NotificationsManager
         var soundFileURL: URL
         var alarmSoundName: String
+        var alarmSoundURL: URL
         var sleepSoundDuratioon: TimeInterval
         var shouldPlayNatureSound: Bool
         var isRecordingEnabled: Bool
@@ -68,6 +69,12 @@ class BoostersWorkflowCoordinator {
                 self.handleInput(.receivedAlarmNotification)
         }
         .store(in: &disposables)
+        audioSession.$interruption
+            .sink() { [unowned self] interruption in
+                guard let interruption = interruption else { return }
+                self.handleInput(BoostersWorkflowCoordinator.BoostersStateInputs.interruption(interruption: interruption))
+        }
+        .store(in: &disposables)
         initialPreparations()
     }
     
@@ -77,19 +84,6 @@ class BoostersWorkflowCoordinator {
     }
     
     func set(alarmDate: Date) {
-        var alarmDate = alarmDate
-        if alarmDate.timeIntervalSinceNow < 0 {
-            alarmDate = alarmDate.addingTimeInterval(dayInSeconds)
-        }
-        notificationsManager.removePendingNotification(with: alarmNotificationIdentifier)
-        notificationsManager.scheduleNotification(
-            at: alarmDate,
-            soundName: alarmSoundName,
-            identifier: alarmNotificationIdentifier,
-            title: "Alarm",
-            subtitle: "Wake up! 🌞") { _ in
-        
-        }
         notificationsManager.requestNotificationsAuthorizationIfNeeded()
             .sink(receiveCompletion: { result in
                 switch result {
@@ -128,11 +122,12 @@ class BoostersWorkflowCoordinator {
         case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && isRecordingEnabled:
             record()
         case (.idle, .stateButtonAction) where self.sleepSoundDuratioon == 0 && !isRecordingEnabled:
-            break // wait for alarm
+            break
         case (.idle, .stateButtonAction):
-            self.playSoundInLoop(contentsOf: soundFileURL, with: sleepSoundDuratioon)
+            try? playSoundInLoop(contentsOf: soundFileURL, with: sleepSoundDuratioon)
+            self.state = .playing
         case (.playing, .stateButtonAction):
-            pauseSound()
+            pausePlaying()
             state = .playingPaused
         case (.playingPaused, .stateButtonAction):
             resumePlaying()
@@ -159,8 +154,14 @@ class BoostersWorkflowCoordinator {
             stopPlaying()
             state = .alarm
             try? playSoundInLoop(contentsOf: alarmSoundURL, with: TimeInterval.greatestFiniteMagnitude)
+        case (.recording, .interruption(let interruption)):
+            interruption == .ended ? resumeRecording() : pauseRecording()
+        case (.playing, .interruption(let interruption)):
+            if interruption == .ended  {
+                resumePlaying()
+            }
         default:
-            print("State is not handled")
+            break
         }
         print("Result state: \(state)")
     }
