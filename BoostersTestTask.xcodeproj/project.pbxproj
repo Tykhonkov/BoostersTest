@@ -118,6 +118,7 @@
 		C22D784124376F84006E0BFF /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C224BE2F2434991B000528E9 /* Formatters.swift */,
 				C22D784224376FAF006E0BFF /* FileManager+Directories.swift */,
 				C215ABED243B92F3000F78C8 /* Bundle+ResourceURL.swift */,
 			);
@@ -151,7 +152,6 @@
 				C22D782E24362FDA006E0BFF /* Core */,
 				C23F56902433E8D500BA5180 /* Supporting Files */,
 				C23F56762433E4A000BA5180 /* Preview Content */,
-				C224BE2F2434991B000528E9 /* Formatters.swift */,
 			);
 			path = BoostersTestTask;
 			sourceTree = "<group>";
