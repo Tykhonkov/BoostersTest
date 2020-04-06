@@ -10,7 +10,7 @@ import AVFoundation
 
 class BoostersAudioRecorder: NSObject {
     
-    private var audioRecorder: AVAudioRecorder!
+    private var audioRecorder: AVAudioRecorder?
     private let settings = [
         AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
         AVSampleRateKey: 12000,
@@ -20,20 +20,20 @@ class BoostersAudioRecorder: NSObject {
     
     func startRecording(in url: URL) throws {
         audioRecorder = try AVAudioRecorder(url: url, settings: settings)
-        audioRecorder.record()
+        audioRecorder?.record()
     }
     
     func stopRecording() {
-        audioRecorder.stop()
+        audioRecorder?.stop()
         audioRecorder = nil
     }
     
     func pause() {
-        audioRecorder.pause()
+        audioRecorder?.pause()
     }
     
     func resume() {
-        audioRecorder.record()
+        audioRecorder?.record()
     }
     
 }
