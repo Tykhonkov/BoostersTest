@@ -22,9 +22,10 @@ class MainViewModel: ObservableObject {
             .enumerated()
             .map { $0.offset == 0 ? "off" : String("\($0.element) min") }
     }
-    @Published var isControlsDissabled: Bool = false
-    @Published var alarmTime: Date?
+
     @Published var isRecordingEnabled: Bool = true
+    @Published var alarmTime: Date?
+    private(set) var isControlsDissabled: Bool = false
     @Published private(set) var statusString: String = "Idle"
     @Published private(set) var stateButtonSwitcherTitle: String = "Play"
 
@@ -97,7 +98,7 @@ class MainViewModel: ObservableObject {
         case .recording:
             return "Recording"
         case .alarm:
-            return "Alarm"
+            return "Alarm! \nWake up! 🌞"
         }
     }
     

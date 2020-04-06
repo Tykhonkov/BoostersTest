@@ -12,9 +12,10 @@ import UIKit
 
 class NotificationsManager: NSObject {
     
+    @Published var receivedNotification: UNNotification!
     private let center: UNUserNotificationCenter
     private let application: UIApplication
-    
+
     init(
         center: UNUserNotificationCenter = UNUserNotificationCenter.current(),
         application: UIApplication = UIApplication.shared
@@ -65,7 +66,8 @@ class NotificationsManager: NSObject {
     ) {
     let content = UNMutableNotificationContent()
         content.title = title
-        content.subtitle = subtitle 
+        content.subtitle = subtitle
+        
         content.sound = UNNotificationSound(named: UNNotificationSoundName(soundName))
         
         let calendar = Calendar.current
@@ -91,11 +93,13 @@ class NotificationsManager: NSObject {
 extension NotificationsManager: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("willPresent notification")
+        
+        receivedNotification = notification
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-           print("didReceive response")
+        receivedNotification = response.notification
+        completionHandler()
     }
     
 }

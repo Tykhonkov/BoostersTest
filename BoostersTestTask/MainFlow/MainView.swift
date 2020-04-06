@@ -154,7 +154,9 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         let soundPath = Bundle.main.path(forResource: "nature.mp4", ofType: nil)!
         let soundFileURL = URL(fileURLWithPath: soundPath)
-        
+        let alarmSoundPath = Bundle.main.path(forResource: "alarm.mp4", ofType: nil)!
+        let alarmSoundFileURL = URL(fileURLWithPath: alarmSoundPath)
+
         let configuration = BoostersWorkflowCoordinator.BoostersCoordinatorConfiguration(
             audioSession: AudioSession(),
             audioPlayer: BoostersAudioPlayer(),
@@ -162,6 +164,7 @@ struct MainView_Previews: PreviewProvider {
             notificationsManager: NotificationsManager(),
             soundFileURL: soundFileURL,
             alarmSoundName: "alarm.mp4",
+            alarmSoundURL: alarmSoundFileURL,
             sleepSoundDuratioon: 20*60,
             shouldPlayNatureSound: true,
             isRecordingEnabled: true
