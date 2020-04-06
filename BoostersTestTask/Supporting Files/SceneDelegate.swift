@@ -23,14 +23,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let soundPath = Bundle.main.path(forResource: "nature.mp4", ofType: nil)!
         let soundFileURL = URL(fileURLWithPath: soundPath)
-        
+        let alarmSoundPath = Bundle.main.path(forResource: "alarm.mp4", ofType: nil)!
+        let alarmSoundFileURL = URL(fileURLWithPath: alarmSoundPath)
+
         let configuration = BoostersWorkflowCoordinator.BoostersCoordinatorConfiguration(
             audioSession: AudioSession(),
             audioPlayer: BoostersAudioPlayer(),
             audioRecorder: BoostersAudioRecorder(),
             notificationsManager: NotificationsManager(),
             soundFileURL: soundFileURL,
-            alarmSoundName: "alarm.mp4",
+            alarmSoundName: "alarm3.aifc",
+            alarmSoundURL: alarmSoundFileURL,
             sleepSoundDuratioon: 20 * 60,
             shouldPlayNatureSound: true,
             isRecordingEnabled: true
